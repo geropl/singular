@@ -1,0 +1,8 @@
+image:
+  file: .gitpod/Dockerfile
+tasks:
+- prebuild: cargo build
+  command: cargo watch -x check
+vscode:
+  extensions:
+    - bungcip.better-toml@0.3.2:3QfgGxxYtGHfJKQU7H0nEw==

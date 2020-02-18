@@ -1,0 +1,46 @@
+[package]
+name = "singular"
+version = "0.1.0"
+authors = ["Gero Posmyk-Leinemann <gero.posmyk-leinemann@typefox.io>"]
+edition = "2018"
+
+# Build a library...
+[lib]
+name = "singular_lib"
+path = "src/lib.rs"
+
+# ...and a binary
+[[bin]]
+name = "singular"
+path = "src/main.rs"
+
+[dependencies]
+# HTTP library
+hyper-reverse-proxy = { git = "https://github.com/geropl/hyper-reverse-proxy", rev = "5d981e322a1cf403a17f3932d6c3af9459df59a4" }
+hyper = "0.13"
+
+# Kubernetes
+# TODO Should be "0.21.2" but cannot due to version conflict on "http" crate
+# kube = { version = "0.23.0", features = ["openapi"] }
+kube = { git = "https://github.com/geropl/kube-rs", rev = "ce73d1b1ba399a82e464aca7d1d1e63270e149b5",  features = ["openapi"] }
+k8s-openapi = { version = "0.6.0", default-features = false, features = ["v1_15"] }
+
+# Async runtime
+tokio = { version = "0.2.11", features = ["full"] }
+futures = "0.3"
+
+# Utility libraries
+# Use unreleased v3.0.0
+clap = { git = "https://github.com/clap-rs/clap/", rev = "bbb14f8bd47ef201b315d367922343577ee60718"}
+anyhow = "1.0.26"
+
+# Logging
+slog = "2.5.2"
+slog-json = "2.3.0"
+slog-term = "2.4.2"
+slog-async = "2.3.0"
+
+# JSON deserialization
+serde = { package = "serde", version = "^1.0", features = ["derive"] }
+serde_json = { package = "serde_json", version = "^1.0" }
+schemars = "0.6.5"
