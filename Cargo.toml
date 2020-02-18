@@ -4,6 +4,11 @@ version = "0.1.0"
 authors = ["Gero Posmyk-Leinemann <gero.posmyk-leinemann@typefox.io>"]
 edition = "2018"
 
+[profile.release]
+opt-level = 'z'  # Optimize for size.
+lto = true
+codegen-units = 1
+
 # Build a library...
 [lib]
 name = "singular_lib"
