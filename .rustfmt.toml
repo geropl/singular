@@ -1,0 +1,26 @@
+# Reference: https://github.com/rust-lang/rustfmt/blob/master/Configurations.md
+edition="2018"
+
+# Brace style
+brace_style="PreferSameLine"
+empty_item_single_line=false
+
+# fn style
+# TODO this does not work yet: formatter does not recognize this option. Won't use until it works.
+fn_args_layout="Compressed"
+overflow_delimited_expr=true
+
+# indentation
+tab_spaces=4
+hard_tabs=false
+
+# imports
+imports_layout="Vertical"
+
+# match
+match_block_trailing_comma=true
+
+# width
+max_width=120
+comment_width=120
+wrap_comments=true

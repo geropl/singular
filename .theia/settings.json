@@ -1,0 +1,33 @@
+{
+   "typescript.tsdk": "node_modules/typescript/lib",
+    "[json]": {
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "[yaml]": {
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2
+    },
+    "[rust]": {
+      "editor.insertSpaces": true,
+      "editor.tabSize": 4
+    },
+   "rust-client.updateOnStartup": false,
+   "rust.clippy_preference": "on",
+   "rust.crate_blacklist": [
+      "cocoa",
+      "gleam",
+      "glium",
+      "idna",
+      "libc",
+      "openssl",
+      "rustc_serialize",
+      "serde",
+      "serde_json",
+      "typenum",
+      "unicode_normalization",
+      "unicode_segmentation",
+      "winapi",
+      "rand"
+   ]
+}
