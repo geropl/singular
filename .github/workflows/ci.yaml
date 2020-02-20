@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install pkg-config libssl-dev
-      run: sudo apt-get install pkg-config libssl-dev
+      run: sudo apt-get install pkg-config libssl-dev curl
     - name: Build OpenSSL
       run: >
         cd /tmp && OPENSSL_VERSION=1.1.1a && \
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install pkg-config libssl-dev
-      run: sudo apt-get install pkg-config libssl-dev
+      run: sudo apt-get install pkg-config libssl-dev curl
     - uses: actions/checkout@master
     - uses: actions-rs/toolchain@v1
       with:
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install pkg-config libssl-dev
-      run: sudo apt-get install pkg-config libssl-dev
+      run: sudo apt-get install pkg-config libssl-dev curl
     - uses: actions/checkout@master
     - uses: actions-rs/toolchain@v1
       with:
