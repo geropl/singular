@@ -7,6 +7,16 @@ jobs:
     steps:
     - name: Install pkg-config libssl-dev
       run: sudo apt-get install pkg-config libssl-dev
+    - name: Build OpenSSL
+      run: >
+        cd /tmp && OPENSSL_VERSION=1.1.1a && \
+        curl -LO "https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz" && \
+        tar xf "openssl-$OPENSSL_VERSION.tar.gz" && cd "openssl-$OPENSSL_VERSION" && \
+        env CC=musl-gcc ./Configure \
+        no-shared no-zlib no-engine no-unit-test -DOPENSSL_NO_SECURE_MEMORY \
+        -fPIC --prefix=/usr/local/musl linux-x86_64 && \
+        env C_INCLUDE_PATH=/usr/local/musl/include/ make depend && \
+        make install_sw
     - uses: actions/checkout@master
     - uses: actions-rs/toolchain@v1
       with:
@@ -14,6 +24,11 @@ jobs:
         target: x86_64-unknown-linux-musl
         override: true
     - uses: actions-rs/cargo@v1
+      env:
+        OPENSSL_DIR: /usr/local/musl/
+        OPENSSL_INCLUDE_DIR: /usr/local/musl/include/
+        OPENSSL_LIB_DIR: /usr/local/musl/lib/
+        OPENSSL_STATIC: 1
       with:
         use-cross: true
         command: check
@@ -31,6 +46,11 @@ jobs:
         target: x86_64-unknown-linux-musl
         override: true
     - uses: actions-rs/cargo@v1
+      env:
+        OPENSSL_DIR: /usr/local/musl/
+        OPENSSL_INCLUDE_DIR: /usr/local/musl/include/
+        OPENSSL_LIB_DIR: /usr/local/musl/lib/
+        OPENSSL_STATIC: 1
       with:
         use-cross: true
         command: test
@@ -49,6 +69,11 @@ jobs:
         override: true
     - run: rustup component add clippy
     - uses: actions-rs/cargo@v1
+      env:
+        OPENSSL_DIR: /usr/local/musl/
+        OPENSSL_INCLUDE_DIR: /usr/local/musl/include/
+        OPENSSL_LIB_DIR: /usr/local/musl/lib/
+        OPENSSL_STATIC: 1
       with:
         command: clippy
         args: -- -D warnings
